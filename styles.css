@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+h2, h5, h6{
+    color: #2a4aa7;
+}
+
+p{
+    color: #0b63ef;
+}
+
+.to-left{
+    margin-left: 5px;
+}
+
+.to-right{
+    margin-right: 5px;
+}
+
+.to-bottom{
+    margin-bottom: 5px;
+}
+
+.speach-position{
+    top: 220px;
+    left:30%;
+    margin:auto;
+}
+
+.btn-dark:hover{
+    background-color: #343a40;
+    cursor: default;
+}
+
+.disabled:hover{
+    cursor: not-allowed;
+}
