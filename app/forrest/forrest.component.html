@@ -1,0 +1,27 @@
+<div class="row" style="text-align: center;">
+    <div class="col">
+        <!-- <h2>{{area}}</h2> -->
+        <h2>Forest</h2>
+    </div>
+</div>
+<hr />
+<br /><div class="row">
+    <div class="col">
+        <h6>{{title}}</h6>
+        <p>{{dialogue}}<p>
+    </div><br /><br/><br />
+</div>
+<hr />
+<h6>Go!</h6>
+<div class="btn btn-group">
+    <button class="btn btn-info to-right" tooltip="north" placement="bottom" (click)="northClicked()">
+        <i class="fas fa-angle-up"></i>
+    </button>
+    <button class="btn  btn-info to-right" tooltip="east" placement="bottom" (click)="eastClicked()">
+        <i class="fas fa-angle-right"></i></button>
+    <button class="btn btn-info to-right" tooltip="south" placement="bottom" (click)="southClicked()"><i class="fas fa-angle-down"></i>
+    </button>
+    <button class="btn btn-info" tooltip="west" placement="bottom" (click)="westClicked()">
+        <i class="fas fa-angle-left"></i>
+    </button>
+</div>

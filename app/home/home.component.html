@@ -1,0 +1,91 @@
+<div class="container-fluid col">
+    <!-- breif -->
+    <div class="row">
+        <h2 *ngIf="isMission" class="col" style="text-align: center;">Mission Brief</h2>
+        <h2 *ngIf="isEnter" class="col" style="text-align: center;">Enter The Woods</h2>
+    </div>
+    <div *ngIf="isMission || isEnter">
+        <hr /><br />
+    </div>
+    <div *ngIf="isMission">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <p>{{missionDialouge}}</p>
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-info" (click)="enter()">Begin</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isEnter" class="row">
+        <div class="col">
+            <div class="btn btn-group">
+                <button class="btn btn-info to-right" (click)="enterCave(); cd.begin()">{{area}}</button>
+                <button class="btn btn-info to-right" (click)="enterForrest(); cd.begin()">{{area}}</button>
+                <button class="btn btn-info to-right" (click)="enterLake(); cd.begin()">{{area}}</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- start -->
+    <div class="row" [hidden]="!isStart">
+        <div class="col-8">
+            <forrest [hidden]="!isForrest" (goldFound)="purse($event)" (enter)="forrestPassage($event)"
+                [isAlfredRescued]="isAlfredRescued">
+            </forrest>
+            <lake [hidden]="!isLake" (goldFound)="purse($event)" (enter)="lakePassage($event)"
+                [isBiteCured]="isBiteCured">
+            </lake>
+            <cave [hidden]="!isCave" (goldFound)="purse($event)" (enter)="cavePassage($event)" (complete)="complete($event)"
+                [isAlfredRescued]="isAlfredRescued" [isBiteCured]="isBiteCured" [isTinaRescued]="isTinaRescued">
+            </cave>
+        </div>
+        <div class="col-4"><br />
+            <div class="btn btn-group-vertical" style="text-align: right;">
+                <button class="btn btn-dark to-bottom" tooltip="Gold" placement="right"><i
+                        class="fas fa-coins to-right"></i> {{totalGold}}</button>
+                <button class="btn btn-dark to-bottom" tooltip="Time" placement="right"><i
+                        class="fas fa-hourglass-end to-right"></i>
+                    <countdown #cd [config]="{leftTime: 120, format: 'm:ss', demand: true}" (event)="timeOut($event)">
+                    </countdown>
+                </button>
+                <br>
+                <button class="btn btn-secondary to-bottom" [class.disabled]="isAlfredRescued"
+                    (click)="tranquilizerClicked()" tooltip="Tranquilizer" placement="right">
+                    <i class="fas fa-coins to-right"></i> 75 | <i class="fas fa-syringe to-left"></i>
+                </button>
+                <button class="btn btn-secondary to-bottom" [class.disabled]="isBiteCured" (click)="medicineClicked()"
+                    tooltip="Medicine" placement="right">
+                    <i class="fas fa-coins to-right"></i> 50 | <i class="fas fa-capsules to-left"></i>
+                </button>
+                <button class="btn btn-secondary to-bottom" [class.disabled]="isTinaRescued" (click)="branchClicked()"
+                    tooltip="Branch" placement="right">
+                    <i class="fas fa-coins to-right"></i> 25 | <i class="fab fa-pagelines to-left"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- result -->
+    <div *ngIf="isResult">
+        <div class="row">
+            <h2 *ngIf="isSuccess" class="col" style="text-align: center;">Mission Successful | Gold: {{totalGold}}</h2>
+            <h2 *ngIf="!isSuccess" class="col" style="text-align: center;">Mission Failed</h2>
+        </div>
+        <hr /><br />
+        <div class="row">
+            <div class="col-8 offset-2">
+                <p *ngIf="isSuccess">Perfect! Tina <span *ngIf="isAlfredRescued && isTinaRescued"> and Alfred are </span><span *ngIf="isTinaRescued && !isAlfredRescued"> is </span>now safe and sound.</p>
+                <p *ngIf="!isSuccess">Oh no... I was unable to complete the mission in time.</p>
+            </div>
+        </div><br />
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-info" (click)="restart()"><span *ngIf="isSuccess">Play </span>
+                    <span *ngIf="!isSuccess">Try </span>again</button>
+            </div>
+        </div>
+    </div>
+</div>
